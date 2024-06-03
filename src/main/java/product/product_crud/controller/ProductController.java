@@ -14,15 +14,17 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(value = "/products")
+@RequestMapping("/products")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
-    @GetMapping(value = "/test")
+    // TODO: Checar se todos estão funcionando
+
+    @GetMapping("/test")
     public ResponseEntity<Map<String, String>> test() {
-        Map<String, String> responseTest =  new HashMap<String, String>();
+        Map<String, String> responseTest = new HashMap<String, String>();
         responseTest.put("message", "Hello world!");
         return ResponseEntity.status(HttpStatus.OK).body(responseTest);
     }
@@ -33,21 +35,23 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(products);
     }
 
-    @GetMapping(value = "/{productUuid}")
+    @GetMapping("/{productUuid}")
     public ResponseEntity<ProductEntity> getOne(@PathVariable UUID productUuid) {
         ProductEntity product = productService.findOne(productUuid);
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
     @PostMapping
-    public ResponseEntity<ProductEntity> insert(@Valid ProductEntity productToInsert) {
+    public ResponseEntity<ProductEntity> insert(@Valid @RequestBody
+                                                ProductEntity productToInsert) {
         productService.insertOne(productToInsert);
         return ResponseEntity.status(HttpStatus.CREATED).body(productToInsert);
     }
 
     @PutMapping("/{productUuid}")
     public ResponseEntity<ProductEntity> update(@PathVariable UUID uuid,
-                                                @Valid ProductEntity productToUpdate) {
+                                                @Valid @RequestBody
+                                                ProductEntity productToUpdate) {
         productService.updateOne(uuid, productToUpdate);
         return ResponseEntity.status(HttpStatus.OK).body(productToUpdate);
     }
@@ -55,6 +59,11 @@ public class ProductController {
     @DeleteMapping("/{productUuid}")
     public ResponseEntity<Void> delete(@PathVariable UUID uuid) {
         productService.deleteOne(uuid);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                .build();
     }
+
+    // TODO: Implementar endpoints para adicionar e remover categoria de um produto
+//    @PostMapping("/{productUUID}/categories/{categoryUUID}")
+
 }

@@ -49,11 +49,9 @@ public class ProductService {
 
     public void addCategoryToTheProduct(ProductEntity product, CategoryEntity category) {
         product.getCategories().add(category);
-        category.getProducts().add(product);
     }
 
     public void removeCategoryFromTheProduct(ProductEntity product, CategoryEntity category) {
         product.getCategories().remove(category);
-        category.getProducts().remove(product);
     }
 }

@@ -1,13 +1,12 @@
 package product.product_crud.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -16,25 +15,17 @@ import java.util.UUID;
 public class ProductEntity {
 
     @Id
-    @Getter
-    @Setter
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
 
-    @Getter
-    @Setter
     @NotBlank
     @NotNull
     private Double price;
 
-    @Getter
-    @Setter
     @NotNull
     @NotBlank
     private String name;
 
-    @Getter
-    @Setter
     @ManyToMany
 //    @JsonIgnore
     @JoinTable(
@@ -42,6 +33,7 @@ public class ProductEntity {
             joinColumns = @JoinColumn(name = "product_uuid"),
             inverseJoinColumns = @JoinColumn(name = "category_uuid")
     )
+    @JsonManagedReference
     private Set<CategoryEntity> categories = new HashSet<CategoryEntity>();
 
     public ProductEntity() {
@@ -51,6 +43,51 @@ public class ProductEntity {
         this.uuid = uuid;
         this.price = price;
         this.name = name;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public @NotBlank @NotNull Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(@NotBlank @NotNull Double price) {
+        this.price = price;
+    }
+
+    public @NotNull @NotBlank String getName() {
+        return name;
+    }
+
+    public void setName(@NotNull @NotBlank String name) {
+        this.name = name;
+    }
+
+    public Set<CategoryEntity> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<CategoryEntity> categories) {
+        this.categories = categories;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductEntity product = (ProductEntity) o;
+        return Objects.equals(uuid, product.uuid);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(uuid);
     }
 }
 
