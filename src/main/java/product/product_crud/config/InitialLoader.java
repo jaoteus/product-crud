@@ -7,7 +7,6 @@ import product.product_crud.entity.CategoryEntity;
 import product.product_crud.entity.ProductEntity;
 import product.product_crud.repository.CategoryRepository;
 import product.product_crud.repository.ProductRepository;
-import product.product_crud.service.CategoryService;
 import product.product_crud.service.ProductService;
 
 @Configuration

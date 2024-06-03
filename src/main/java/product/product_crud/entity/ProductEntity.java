@@ -1,5 +1,6 @@
 package product.product_crud.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -27,7 +28,7 @@ public class ProductEntity {
     private String name;
 
     @ManyToMany
-//    @JsonIgnore
+    @JsonIgnore
     @JoinTable(
             name = "product_category",
             joinColumns = @JoinColumn(name = "product_uuid"),
