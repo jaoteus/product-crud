@@ -18,6 +18,8 @@ import java.util.UUID;
 @RequestMapping("/categories")
 public class CategoryController {
 
+    // TODO: checar se todas as funcionalidades estão funcionando corretamente
+
     @Autowired
     private CategoryService categoryService;
 

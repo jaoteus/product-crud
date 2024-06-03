@@ -25,6 +25,8 @@ public class InitialLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+        // TODO: adicionar mais algumas entidades para fazer testes
         CategoryEntity category1 = new CategoryEntity(null, "Computers");
         CategoryEntity category2 = new CategoryEntity(null, "Eletronics");
         categoryRepository.save(category1);

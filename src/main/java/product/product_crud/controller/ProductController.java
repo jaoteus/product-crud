@@ -20,7 +20,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    // TODO: Checar se todos estão funcionando
+    // TODO: Checar se todas as funcionalidade estão funcionando corretamente
 
     @GetMapping("/test")
     public ResponseEntity<Map<String, String>> test() {
