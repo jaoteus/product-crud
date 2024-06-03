@@ -2,6 +2,7 @@ package product.product_crud.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import product.product_crud.entity.CategoryEntity;
 import product.product_crud.entity.ProductEntity;
 import product.product_crud.exception.ProductNotFoundException;
 import product.product_crud.repository.ProductRepository;
@@ -14,6 +15,9 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private CategoryService categoryService;
 
     public List<ProductEntity> findAll() {
         List<ProductEntity> products = productRepository.findAll();
@@ -41,5 +45,15 @@ public class ProductService {
     public void deleteOne(UUID uuid) {
         ProductEntity productToDelete = findOne(uuid);
         productRepository.delete(productToDelete);
+    }
+
+    public void addCategoryToTheProduct(ProductEntity product, CategoryEntity category) {
+        product.getCategories().add(category);
+        category.getProducts().add(product);
+    }
+
+    public void removeCategoryFromTheProduct(ProductEntity product, CategoryEntity category) {
+        product.getCategories().remove(category);
+        category.getProducts().remove(product);
     }
 }

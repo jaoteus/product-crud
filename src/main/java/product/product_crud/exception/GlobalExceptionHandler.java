@@ -27,4 +27,11 @@ public class GlobalExceptionHandler {
         Map<String, String> response = new HashMap<String, String>(Map.of("message", e.getMessage()));
         return new ResponseEntity<Map<String, String>>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(CategoryNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<?> categoryNotFoundException(CategoryNotFoundException e) {
+        Map<String, String> response = new HashMap<String, String>(Map.of("message", e.getMessage()));
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
 }
