@@ -1,5 +1,6 @@
 package product.product_crud.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -14,6 +15,8 @@ import java.util.UUID;
 @Entity
 @Table(name = "tb_products")
 public class ProductEntity {
+    // TODO: Achar um solução para mostrar tanto os produtos que possuem as categorias
+    // e mostrar as categorias que possuem os produtos
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -34,7 +37,6 @@ public class ProductEntity {
             joinColumns = @JoinColumn(name = "product_uuid"),
             inverseJoinColumns = @JoinColumn(name = "category_uuid")
     )
-    @JsonManagedReference
     private Set<CategoryEntity> categories = new HashSet<CategoryEntity>();
 
     public ProductEntity() {

@@ -47,11 +47,15 @@ public class ProductService {
         productRepository.delete(productToDelete);
     }
 
-    public void addCategoryToTheProduct(ProductEntity product, CategoryEntity category) {
-        product.getCategories().add(category);
+    public void addCategoryToTheProduct(ProductEntity product, CategoryEntity[] categories) {
+        for (CategoryEntity category : categories) {
+            product.getCategories().add(category);
+        }
     }
 
-    public void removeCategoryFromTheProduct(ProductEntity product, CategoryEntity category) {
-        product.getCategories().remove(category);
+    public void removeCategoryFromTheProduct(ProductEntity product, CategoryEntity... categories) {
+        for (CategoryEntity category : categories) {
+            product.getCategories().remove(category);
+        }
     }
 }
