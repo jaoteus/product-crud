@@ -66,22 +66,22 @@ public class InitialLoader implements CommandLineRunner {
         );
 
         productService.addCategoryToTheProduct(product1, Arrays.asList(category1, category2)
-                .toArray(new CategoryEntity[1]));
+                .toArray(new CategoryEntity[0]));
 
         productService.addCategoryToTheProduct(product2, Arrays.asList(category6)
                 .toArray(new CategoryEntity[0]));
 
         productService.addCategoryToTheProduct(product3, Arrays.asList(category3, category2)
-                .toArray(new CategoryEntity[1]));
+                .toArray(new CategoryEntity[0]));
 
         productService.addCategoryToTheProduct(product4, Arrays.asList(category5)
-                .toArray(new CategoryEntity[1]));
+                .toArray(new CategoryEntity[0]));
 
         productService.addCategoryToTheProduct(product5, Arrays.asList(category4)
-                .toArray(new CategoryEntity[1]));
+                .toArray(new CategoryEntity[0]));
 
         productService.addCategoryToTheProduct(product6, Arrays.asList(category6, category7)
-                .toArray(new CategoryEntity[1]));
+                .toArray(new CategoryEntity[0]));
 
         productRepository.saveAll(
                 Arrays.asList(
