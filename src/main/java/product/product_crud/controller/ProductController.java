@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import product.product_crud.entity.CategoryEntity;
 import product.product_crud.entity.ProductEntity;
+import product.product_crud.service.CategoryService;
 import product.product_crud.service.ProductService;
 
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +22,9 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     // TODO: Checar se todas as funcionalidade estão funcionando corretamente
 
@@ -64,6 +70,10 @@ public class ProductController {
     }
 
     // TODO: Implementar endpoints para adicionar e remover categoria de um produto
-//    @PostMapping("/{productUUID}/categories/{categoryUUID}")
-
+    @PostMapping("/{productUUID}/categories/{categoryUUID}")
+    public ResponseEntity<?> addCategotyToTheProduct(@PathVariable UUID productUUID,
+                                                     @PathVariable UUID categoryUUID) {
+        productService.addCategoryToTheProduct(productService.findOne(productUUID), List.of(categoryService.findOne(categoryUUID)).toArray(new CategoryEntity[0]));
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }

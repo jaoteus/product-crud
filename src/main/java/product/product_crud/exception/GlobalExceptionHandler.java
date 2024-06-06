@@ -32,6 +32,20 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<?> categoryNotFoundException(CategoryNotFoundException e) {
         Map<String, String> response = new HashMap<String, String>(Map.of("message", e.getMessage()));
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<Map<String, String>>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(CategoryIsAlreadyInTheProductException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<?> categoryIsAlreadyInTheProjectException(CategoryIsAlreadyInTheProductException e) {
+        Map<String, String> response = new HashMap<>(Map.of("message", e.getMessage()));
+        return new ResponseEntity<Map<String, String>>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CategoryIsNotInTheProductException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<?> categoryIsNotInTheProductException(CategoryIsNotInTheProductException e) {
+        Map<String, String> response = new HashMap<>(Map.of("message", e.getMessage()));
+        return new ResponseEntity<Map<String, String>>(response, HttpStatus.NOT_FOUND);
     }
 }

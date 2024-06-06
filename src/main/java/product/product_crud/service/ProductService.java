@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import product.product_crud.entity.CategoryEntity;
 import product.product_crud.entity.ProductEntity;
+import product.product_crud.exception.CategoryIsAlreadyInTheProductException;
 import product.product_crud.exception.ProductNotFoundException;
 import product.product_crud.repository.ProductRepository;
 
@@ -47,13 +48,23 @@ public class ProductService {
         productRepository.delete(productToDelete);
     }
 
+    // TODO: Checar se esta funcionalidade está funcionando corretamente
     public void addCategoryToTheProduct(ProductEntity product, CategoryEntity[] categories) {
-        for (CategoryEntity category : categories) {
-            product.getCategories().add(category);
+
+        for (CategoryEntity i : product.getCategories()) {
+            for (CategoryEntity j : categories) {
+                if (i == j) {
+                    throw new CategoryIsAlreadyInTheProductException("this category is already in the project");
+                }
+            }
+        }
+        for (CategoryEntity i : categories) {
+            product.getCategories().add(i);
         }
     }
 
-    public void removeCategoryFromTheProduct(ProductEntity product, CategoryEntity... categories) {
+    // TODO: Implementar a funcionalidade para remover uma categoria de um produto
+    public void removeCategoryFromTheProduct(ProductEntity product, CategoryEntity[] categories) {
         for (CategoryEntity category : categories) {
             product.getCategories().remove(category);
         }

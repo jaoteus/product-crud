@@ -16,7 +16,6 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     public CategoryEntity findOne(UUID uuid) {
-        // TODO: Remover o teste se ele não funcionar
         CategoryEntity category = categoryRepository.findById(uuid).orElseThrow(() -> new CategoryNotFoundException("Category not found"));
         return category;
     }
