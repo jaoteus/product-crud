@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,9 +41,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<Map<String, String>>(response, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(CategoryIsNotInTheProductException.class)
+    @ExceptionHandler(CategoryNotFoundOnThisProductException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<?> categoryIsNotInTheProductException(CategoryIsNotInTheProductException e) {
+    public ResponseEntity<?> categoryIsNotInTheProductException(CategoryNotFoundOnThisProductException e) {
         Map<String, String> response = new HashMap<>(Map.of("message", e.getMessage()));
         return new ResponseEntity<Map<String, String>>(response, HttpStatus.NOT_FOUND);
     }

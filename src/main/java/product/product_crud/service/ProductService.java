@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import product.product_crud.entity.CategoryEntity;
 import product.product_crud.entity.ProductEntity;
 import product.product_crud.exception.CategoryIsAlreadyInTheProductException;
+import product.product_crud.exception.CategoryNotFoundOnThisProductException;
 import product.product_crud.exception.ProductNotFoundException;
 import product.product_crud.repository.ProductRepository;
 
@@ -49,24 +50,23 @@ public class ProductService {
     }
 
     // TODO: Checar se esta funcionalidade está funcionando corretamente
-    public void addCategoryToTheProduct(ProductEntity product, CategoryEntity[] categories) {
+    public void addCategoryToTheProduct(ProductEntity product, CategoryEntity category) {
 
         for (CategoryEntity i : product.getCategories()) {
-            for (CategoryEntity j : categories) {
-                if (i == j) {
-                    throw new CategoryIsAlreadyInTheProductException("this category is already in the project");
-                }
+            if (i == category) {
+                throw new CategoryIsAlreadyInTheProductException("this category is already in the product");
             }
         }
-        for (CategoryEntity i : categories) {
-            product.getCategories().add(i);
-        }
+        product.getCategories().add(category);
     }
 
     // TODO: Implementar a funcionalidade para remover uma categoria de um produto
-    public void removeCategoryFromTheProduct(ProductEntity product, CategoryEntity[] categories) {
-        for (CategoryEntity category : categories) {
-            product.getCategories().remove(category);
+    public void removeCategoryFromTheProduct(ProductEntity product, CategoryEntity category) {
+        for (CategoryEntity i : product.getCategories()) {
+            if (category != i) {
+                throw new CategoryNotFoundOnThisProductException("category not found on the product");
+            }
         }
+        product.getCategories().remove(category);
     }
 }

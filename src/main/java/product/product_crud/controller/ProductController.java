@@ -5,12 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import product.product_crud.entity.CategoryEntity;
 import product.product_crud.entity.ProductEntity;
 import product.product_crud.service.CategoryService;
 import product.product_crud.service.ProductService;
 
-import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,15 +63,21 @@ public class ProductController {
     @DeleteMapping("/{productUuid}")
     public ResponseEntity<Void> delete(@PathVariable UUID uuid) {
         productService.deleteOne(uuid);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                .build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     // TODO: Implementar endpoints para adicionar e remover categoria de um produto
     @PostMapping("/{productUUID}/categories/{categoryUUID}")
-    public ResponseEntity<?> addCategotyToTheProduct(@PathVariable UUID productUUID,
+    public ResponseEntity<Void> addCategotyToTheProduct(@PathVariable UUID productUUID,
                                                      @PathVariable UUID categoryUUID) {
-        productService.addCategoryToTheProduct(productService.findOne(productUUID), List.of(categoryService.findOne(categoryUUID)).toArray(new CategoryEntity[0]));
+        productService.addCategoryToTheProduct(productService.findOne(productUUID), categoryService.findOne(categoryUUID));
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @DeleteMapping("/{productUUID}/categories/{categoryUUID}")
+    public ResponseEntity<Void> removeCategoryFromTheProduct(@PathVariable UUID productUUID,
+                                                             @PathVariable UUID categoryUUID) {
+        productService.removeCategoryFromTheProduct(productService.findOne(productUUID), categoryService.findOne(categoryUUID));
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
