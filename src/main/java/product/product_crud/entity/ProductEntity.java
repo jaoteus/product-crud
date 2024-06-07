@@ -29,7 +29,7 @@ public class ProductEntity {
     private String name;
 
     @ManyToMany
-    @JsonIgnore
+//    @JsonIgnore
     @JoinTable(
             name = "product_category",
             joinColumns = @JoinColumn(name = "product_uuid"),

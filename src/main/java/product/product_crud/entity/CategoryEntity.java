@@ -1,5 +1,6 @@
 package product.product_crud.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -20,7 +21,7 @@ public class CategoryEntity {
 
     //TODO: Depois colocar um método para adicionar produtos
 
-//    @JsonIgnore
+    @JsonIgnore
     @JsonManagedReference
     @ManyToMany(mappedBy = "categories")
     private Set<ProductEntity> products = new HashSet<ProductEntity>();

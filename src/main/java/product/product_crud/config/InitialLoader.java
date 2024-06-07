@@ -49,19 +49,19 @@ public class InitialLoader implements CommandLineRunner {
 
         ProductEntity product1 = new ProductEntity(null, 4590.00, "Dell Inspiron 5000");
         ProductEntity product2 = new ProductEntity(null, 33.15, "Divertidamente 2");
-        ProductEntity product3 = new ProductEntity(null, 4567.00, "SmartTV SmarTech");
-        ProductEntity product4 = new ProductEntity(null, 230.00, "Clean Code");
-        ProductEntity product5 = new ProductEntity(null, 15.00, "Vitamina C");
-        ProductEntity product6 =  new ProductEntity(null, 0d, "Interestelar");
+//        ProductEntity product3 = new ProductEntity(null, 4567.00, "SmartTV SmarTech");
+//        ProductEntity product4 = new ProductEntity(null, 230.00, "Clean Code");
+//        ProductEntity product5 = new ProductEntity(null, 15.00, "Vitamina C");
+//        ProductEntity product6 =  new ProductEntity(null, 0d, "Interestelar");
 
         productRepository.saveAll(
                 Arrays.asList(
                         product1,
-                        product2,
-                        product3,
-                        product4,
-                        product5,
-                        product6
+                        product2
+//                        product3,
+//                        product4,
+//                        product5,
+//                        product6
                 )
         );
 
@@ -70,24 +70,24 @@ public class InitialLoader implements CommandLineRunner {
 
         productService.addCategoryToTheProduct(product2, category6);
 
-        productService.addCategoryToTheProduct(product3, category2);
-        productService.addCategoryToTheProduct(product3, category3);
-
-        productService.addCategoryToTheProduct(product4, category5);
-
-        productService.addCategoryToTheProduct(product5, category4);
-
-        productService.addCategoryToTheProduct(product6, category6);
-        productService.addCategoryToTheProduct(product6, category7);
+//        productService.addCategoryToTheProduct(product3, category2);
+//        productService.addCategoryToTheProduct(product3, category3);
+//
+//        productService.addCategoryToTheProduct(product4, category5);
+//
+//        productService.addCategoryToTheProduct(product5, category4);
+//
+//        productService.addCategoryToTheProduct(product6, category6);
+//        productService.addCategoryToTheProduct(product6, category7);
 
         productRepository.saveAll(
                 Arrays.asList(
                         product1,
-                        product2,
-                        product3,
-                        product4,
-                        product5,
-                        product6
+                        product2
+//                        product3,
+//                        product4,
+//                        product5,
+//                        product6
                 )
         );
     }
