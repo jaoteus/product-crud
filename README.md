@@ -106,10 +106,10 @@ Observe que nós iremos receber uma lista com todos os produtos:
 
 ---
 
-### Consultar uma aeronave por id
+### Consultar um produto por id
 
-- **Rota:** `GET /aircrafts/{id}`
-- **Descrição:** Retorna uma aeronave.
+- **Rota:** `GET /products/{id}`
+- **Descrição:** Retorna um produto juntamente com suas categorias.
 - **Exemplo:**
 
 Observe que, diferente da requisição que nós fizemos anteriormente, desta vez ele retornou  apenas uma aeronave, caso não exista uma aeronave com o id que você passou, você irá receber o erro de Not Found.
@@ -118,10 +118,10 @@ Observe que, diferente da requisição que nós fizemos anteriormente, desta vez
 
 ---
 
-### Adicionar uma aeronave
+### Adicionar um produto
 
-- **Rota:** `POST /aircrafts`
-- **Descrição:** Adiciona uma nova aeronave.
+- **Rota:** `POST /products`
+- **Descrição:** Adiciona um produto.
 - **Exemplo:**
 
 Nesta requisição nós iremos adicionar uma nova aeronave, mas preste a atenção no campo `aircraftStatus` que está como `IN_MAINTENANCE`, pois nós iremos citar ela futuramente.
@@ -134,10 +134,10 @@ Iremos fazer outra requisição para obter todas as aeronaves, e perceba que a a
 
 ---
 
-### Atualizar uma aeronave por id
+### Atualizar um produto por id
 
-- **Rota:** `PUT /aircrafts/{id}`
-- **Descrição:** Atualiza os campos da aeronave pelo id.
+- **Rota:** `PUT /products/{id}`
+- **Descrição:** Atualiza os campos de um produto.
 - **Exemplo:**
 
 Agora nós iremos atualizar a aeronave que nós adicionamos anteriormente, você provavelmente percebeu que quando nós adicionamos esta aeronave, o campo `aircraftStatus` estava como `IN_MAINTENANCE`, mas agora nós iremos colocar este campo como
@@ -151,9 +151,9 @@ Iremos fazer outra requisição `GET`, mas desta vez, estamos procuramos especif
 
 ---
 
-### Deletar uma aeronave por id
+### Deletar um produto por id
 
-- **Rota:** `DELETE /aircrafts/{id}`
+- **Rota:** `DELETE /products/{id}`
 - **Descrição:** Deleta uma aeronave pelo id.
 
 Agora nós iremos deletar a aeronave que nós adicionamos e atualizamos anteriormente:
@@ -166,9 +166,9 @@ Iremos fazer outra requisição `GET`, mas desta vez nós iremos obter todas as 
 
 ---
 
-### Consultar todos os hangares
+### Consultar todas as categorias
 
-- **Rota:** `GET /hangars`
+- **Rota:** `GET /categories`
 - **Descrição:** Retorna uma lista com todos os hangares adicionados juntamente com todas as aeronaves que possuem no hangar.
 
 Observe que nós iremos receber uma lista com todos os hangares e todas as aeronaves que o hangar possui:
@@ -177,7 +177,7 @@ Observe que nós iremos receber uma lista com todos os hangares e todas as aeron
 
 ---
 
-### Consultar um hangar por id
+### Consultar uma categoria por id
 
 - **Rota:** `GET /hangars/{id}`
 - **Descrição:** Retorna um hangar juntamente com todas as aeronaves que possuem no hangar.
@@ -189,9 +189,9 @@ Diferente da requisição anterior, esta requisição irá retornar apenas um ha
 
 ---
 
-### Adicionar um hangar
+### Adicionar uma categoria
 
-- **Rota:** `POST /hangars`
+- **Rota:** `POST /categories`
 - **Descrição:** Adiciona um hangar.
 
 Nesta requisição, nós iremos adicionar um hangar:
@@ -205,7 +205,7 @@ Olhe para o campo `aircrafts`, temos uma lista vazia, pois ainda não adicionamo
 
 ---
 
-### Atualizar um hangar por id
+### Atualizar uma categoria por id
 
 - **Rota:** `PUT /hangars/{id}`
 - **Descrição:** Atualiza os campos do hangar pelo id.
@@ -221,10 +221,11 @@ Iremos fazer outra requisição `GET` para obter especificamente o hangar com o 
 
 ---
 
-### Adicionar uma aeronave no hangar
+### Adicionar uma categoria em um produto
 
 - **Rota:** `POST /hangars/{id}/aircrafts/{id}`
 - **Descrição:** Adiciona uma aeronave em um hangar.
+- **Código HTTP:** `200`
 
 Nesta requisição, iremos adicionar uma aeronave que possui o id 10 no hangar que possui o id 4 (o hangar que nós adicionamos anteriormente):
 
@@ -236,7 +237,7 @@ Lembra que antes o nosso campo `aircrafts` estava com uma lista vazia ? Agora n�
 
 ---
 
-### Remover uma aeronave do hangar
+### Remover uma categoria de um produto
 
 - **Rota:** `DELETE /hangars/{id}/aircrafts/{id}`
 - **Descrição:** Remove uma aeronave do hangar.
@@ -252,7 +253,7 @@ Agora o campo `aircrafts` voltou a ser uma lista vazia, pois nós acabamos de re
 
 ---
 
-### Deletar um hangar por id
+### Deletar categoria de um produto
 
 - **Rota:** `DELETE /hangars/{id}`
 - **Descrição:** Deleta um hangar pelo id.
@@ -290,7 +291,6 @@ Agora compile e execute a aplicação:
 mvn clean install
 mvn spring-boot:run
 ```
-
 
 ### 📄 Licença
 Este projeto está licenciado sob a Licença MIT. Veja o arquivo LICENSE para mais detalhes.
