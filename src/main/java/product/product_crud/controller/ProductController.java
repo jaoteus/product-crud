@@ -24,8 +24,6 @@ public class ProductController {
     @Autowired
     private CategoryService categoryService;
 
-    // TODO: Checar se todas as funcionalidade estão funcionando corretamente
-
     @GetMapping("/test")
     public ResponseEntity<Map<String, String>> test() {
         Map<String, String> responseTest = new HashMap<String, String>();
@@ -39,34 +37,36 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(products);
     }
 
-    @GetMapping("/{productUuid}")
-    public ResponseEntity<ProductEntity> getOne(@PathVariable UUID productUuid) {
-        ProductEntity product = productService.findOne(productUuid);
+    @GetMapping("/{productUUID}")
+    public ResponseEntity<ProductEntity> getOne(@PathVariable UUID productUUID) {
+        ProductEntity product = productService.findOne(productUUID);
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
     @PostMapping
-    public ResponseEntity<ProductEntity> insert(@Valid @RequestBody
+    public ResponseEntity<Void> insert(@Valid @RequestBody
                                                 ProductEntity productToInsert) {
         productService.insertOne(productToInsert);
-        return ResponseEntity.status(HttpStatus.CREATED).body(productToInsert);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PutMapping("/{productUuid}")
-    public ResponseEntity<ProductEntity> update(@PathVariable UUID uuid,
+    @PutMapping("/{productUUID}")
+    public ResponseEntity<Void> update(@PathVariable UUID productUUID,
                                                 @Valid @RequestBody
                                                 ProductEntity productToUpdate) {
-        productService.updateOne(uuid, productToUpdate);
-        return ResponseEntity.status(HttpStatus.OK).body(productToUpdate);
+        productService.updateOne(productUUID, productToUpdate);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @DeleteMapping("/{productUuid}")
-    public ResponseEntity<Void> delete(@PathVariable UUID uuid) {
-        productService.deleteOne(uuid);
+    @DeleteMapping("/{productUUID}")
+    public ResponseEntity<Void> delete(@PathVariable UUID productUUID) {
+        productService.deleteOne(productUUID);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    // TODO: Implementar endpoints para adicionar e remover categoria de um produto
+    // TODO: Implementar endpoint para adicionar
+    // TODO: Implementar endpoint para remover categoria de um produto
+    // TODO: Checar se as novas funcionalidades estão funcionando corretamente
     @PostMapping("/{productUUID}/categories/{categoryUUID}")
     public ResponseEntity<Void> addCategotyToTheProduct(@PathVariable UUID productUUID,
                                                      @PathVariable UUID categoryUUID) {
