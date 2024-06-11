@@ -10,6 +10,7 @@ import product.product_crud.exception.ProductNotFoundException;
 import product.product_crud.repository.ProductRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -50,7 +51,9 @@ public class ProductService {
     }
 
     // TODO: Checar se esta funcionalidade está funcionando corretamente
-    public void addCategoryToTheProduct(ProductEntity product, CategoryEntity category) {
+    public void addCategoryToTheProduct(UUID productUUID, UUID categoryUUID) {
+        ProductEntity product = findOne(productUUID);
+        CategoryEntity category = categoryService.findOne(categoryUUID);
 
         for (CategoryEntity i : product.getCategories()) {
             if (i == category) {
@@ -58,6 +61,7 @@ public class ProductService {
             }
         }
         product.getCategories().add(category);
+        productRepository.save(product);
     }
 
     // TODO: Implementar a funcionalidade para remover uma categoria de um produto
@@ -68,5 +72,6 @@ public class ProductService {
             }
         }
         product.getCategories().remove(category);
+        productRepository.save(product);
     }
 }

@@ -65,10 +65,10 @@ public class InitialLoader implements CommandLineRunner {
                 )
         );
 
-        productService.addCategoryToTheProduct(product1, category1);
-        productService.addCategoryToTheProduct(product1, category2);
+        product1.getCategories().add(category1);
+        product1.getCategories().add(category2);
 
-        productService.addCategoryToTheProduct(product2, category6);
+        product2.getCategories().add(category6);
 
 //        productService.addCategoryToTheProduct(product3, category2);
 //        productService.addCategoryToTheProduct(product3, category3);
