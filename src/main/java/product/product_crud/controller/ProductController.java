@@ -77,7 +77,7 @@ public class ProductController {
     @DeleteMapping("/{productUUID}/categories/{categoryUUID}")
     public ResponseEntity<Void> removeCategoryFromTheProduct(@PathVariable UUID productUUID,
                                                              @PathVariable UUID categoryUUID) {
-        productService.removeCategoryFromTheProduct(productService.findOne(productUUID), categoryService.findOne(categoryUUID));
+        productService.removeCategoryFromTheProduct(productUUID, categoryUUID);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

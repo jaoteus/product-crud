@@ -7,6 +7,7 @@ import product.product_crud.entity.ProductEntity;
 import product.product_crud.exception.CategoryIsAlreadyInTheProductException;
 import product.product_crud.exception.CategoryNotFoundOnThisProductException;
 import product.product_crud.exception.ProductNotFoundException;
+import product.product_crud.exception.ProductWithNoCategoryException;
 import product.product_crud.repository.ProductRepository;
 
 import java.util.List;
@@ -50,7 +51,6 @@ public class ProductService {
         productRepository.delete(productToDelete);
     }
 
-    // TODO: Checar se esta funcionalidade está funcionando corretamente
     public void addCategoryToTheProduct(UUID productUUID, UUID categoryUUID) {
         ProductEntity product = findOne(productUUID);
         CategoryEntity category = categoryService.findOne(categoryUUID);
@@ -65,13 +65,20 @@ public class ProductService {
     }
 
     // TODO: Implementar a funcionalidade para remover uma categoria de um produto
-    public void removeCategoryFromTheProduct(ProductEntity product, CategoryEntity category) {
+    public void removeCategoryFromTheProduct(UUID productUUID, UUID categoryUUID) {
+        ProductEntity product = findOne(productUUID);
+        CategoryEntity category = categoryService.findOne(categoryUUID);
+
+        if (product.getCategories().isEmpty())
+            throw new ProductWithNoCategoryException("This product has no category yet");
+
         for (CategoryEntity i : product.getCategories()) {
-            if (category != i) {
+            if (category == i) {
+                product.getCategories().remove(category);
+                productRepository.save(product);
+            } else {
                 throw new CategoryNotFoundOnThisProductException("category not found on the product");
             }
         }
-        product.getCategories().remove(category);
-        productRepository.save(product);
     }
 }
