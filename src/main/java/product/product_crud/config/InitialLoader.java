@@ -16,13 +16,9 @@ public class InitialLoader implements CommandLineRunner {
 
     @Autowired
     private CategoryRepository categoryRepository;
-//    private CategoryService categoryService;
 
     @Autowired
     private ProductRepository productRepository;
-    @Autowired
-    private ProductService productService;
-
 
     @Override
     public void run(String... args) throws Exception {
