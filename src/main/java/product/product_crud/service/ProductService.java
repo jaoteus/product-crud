@@ -64,18 +64,21 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    // TODO: Implementar a funcionalidade para remover uma categoria de um produto
+    // TODO: Fazer testes para saber se este endpoint está funcionando
+    // TODO: Testar as exceções
     public void removeCategoryFromTheProduct(UUID productUUID, UUID categoryUUID) {
         ProductEntity product = findOne(productUUID);
         CategoryEntity category = categoryService.findOne(categoryUUID);
 
-        if (product.getCategories().isEmpty())
+        if (product.getCategories().isEmpty()) {
             throw new ProductWithNoCategoryException("This product has no category yet");
+        }
 
-        for (CategoryEntity i : product.getCategories()) {
-            if (category == i) {
+        for (int i = 0; i < product.getCategories().size(); i++) {
+            if (product.getCategories().contains(category)) {
                 product.getCategories().remove(category);
                 productRepository.save(product);
+                System.out.println("possui categoria: linha 78");
             } else {
                 throw new CategoryNotFoundOnThisProductException("category not found on the product");
             }
