@@ -64,8 +64,6 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    // TODO: Implementar endpoint para adicionar uma categoria em um produto
-    // TODO: Implementar endpoint para remover categoria de um produto
     // TODO: Checar se as novas funcionalidades estão funcionando corretamente
     @PostMapping("/{productUUID}/categories/{categoryUUID}")
     public ResponseEntity<Void> addCategotyToTheProduct(@PathVariable UUID productUUID,
