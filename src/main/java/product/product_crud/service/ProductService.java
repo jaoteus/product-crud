@@ -64,8 +64,6 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    // TODO: Fazer testes para saber se este endpoint está funcionando
-    // TODO: Testar as exceções
     public void removeCategoryFromTheProduct(UUID productUUID, UUID categoryUUID) {
         ProductEntity product = findOne(productUUID);
         CategoryEntity category = categoryService.findOne(categoryUUID);
